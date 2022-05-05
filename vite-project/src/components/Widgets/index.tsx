@@ -43,13 +43,19 @@ export function Index() {
     // Permitindo apenas os valores dentro de FeedbackType ou nulos
     const [ feedbackType, setFeedbackTypes ] = useState<FeedbackType | null>(null)
 
+    function handleRestartFeedback() {
+        setFeedbackTypes(null);
+    }
+
     return (
         <div className="bg-zinc-900 p-4 relative rounded-2xl mb-4 flex flex-col items-center shadows-lg w-[calc(100vw-2rem)] md:w-auto">
-
             {!feedbackType ? (
                 <FeedbackTypeStep onFeedbackTypeChange={setFeedbackTypes} />
             ) : (
-                <FeedbackContentStep feedbackType={feedbackType} />
+                <FeedbackContentStep 
+                  feedbackType={feedbackType} 
+                  onFeedbackRestartRequested={handleRestartFeedback}
+                />
             )}
 
             <footer className="text-xs text-neutral-400">
