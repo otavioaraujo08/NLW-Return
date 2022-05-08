@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Banco de dados que estamos utilizando e a url dele
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Delcarando nossas tabelas
+model Feedback {
+  // Criando nossos campos do bd
+  // ID será nossa primary key - Responsável por diferenciar dos outros campos - Ela também tera os valores de ID gerados aleatoriamente no padrão "uuid"
+  id String @id @default(uuid())
+
+  type        String
+  comment     String
+  // Caso seja opcional, colocar "?" no final
+  screenshot  String?
+
+  // Nossa tabela irá se chaamr: feedbacks
+  @@map("feedbacks")
+}
+
+// Para criar nossas tabelas - deverá ser rodado o comando: "npx prsima migrate {nome do ambiente: Ex: dev}"
+// Para ver as nossas tabelas - deverá ser rodado o comando: "npx prisma studio"
